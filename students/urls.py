@@ -8,12 +8,17 @@ urlpatterns = [
     path(
         route='',
         view=views.IndexView.as_view(),
-        name='feed'),
+        name='index'),
+    path(
+        route='busqueda/',
+        view=views.SearchStudent.as_view(),
+        name='search'),
 
-    # path(
-    #     route='posts/new',
-    #     view=views.CreatePostView.as_view(),
-    #     name='create_post'),
+    path(
+        route='registrar/',
+        view=views.RegisterStudent.as_view(),
+        name='register'),
+
 
     # path(
     #     route='posts/detail/<int:pk>/',

@@ -25,7 +25,11 @@ class Profile(models.Model):
         'Rol',
         choices=ROL_CHOICES,
     )
-    institution = models.OneToOneField(Institution, on_delete=models.CASCADE)
+    institution = models.OneToOneField(
+        Institution,
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True)
 
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
