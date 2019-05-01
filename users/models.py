@@ -11,7 +11,7 @@ ROL_CHOICES = (
 
 class Institution(models.Model):
     """Institutions model"""
-    name = models.CharField('Nombre', max_length=30, blank=True)
+    name = models.CharField('Nombre', max_length=30)
 
     def __str__(self):
         """return name"""
