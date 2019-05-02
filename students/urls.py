@@ -18,6 +18,10 @@ urlpatterns = [
         route='registrar/',
         view=views.RegisterStudent.as_view(),
         name='register'),
+    path(
+        route='total/',
+        view=views.ReportStudents.as_view(),
+        name='report'),
 
 
     # path(

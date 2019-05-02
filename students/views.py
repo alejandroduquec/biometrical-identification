@@ -74,9 +74,11 @@ class SearchStudent(LoginRequiredMixin, FormView):
             student_data = data.get('student')
             students = identification_name(student_data)
             if students:
-                sweetify.success(request, 'Éxito', text='La busqueda ha finalizado', persistent='Listo')
+                sweetify.success(
+                    request, 'Éxito', text='La busqueda ha finalizado', persistent='Listo')
             else:
-                sweetify.error(request, 'Sin Resultado', text='La busqueda ha finalizado', persistent='Listo')
+                sweetify.error(
+                    request, 'Sin Resultado', text='La busqueda ha finalizado', persistent='Listo')
             return render(request, 'search.html', {'form': form, 'students': students})
 
         else:
@@ -97,3 +99,18 @@ class RegisterStudent(LoginRequiredMixin, CreateView):
                          persistent='Listo')
         return HttpResponseRedirect(self.success_url)
 
+
+class ReportStudents(LoginRequiredMixin, TemplateView):
+    """Index View"""
+    template_name = 'report.html'
+
+    def get_context_data(self, **kwargs):
+        """add data  to context"""
+        context = super().get_context_data(**kwargs)
+        students = Student.objects.all()
+        if self.request.user.profile.institution:
+            pass
+        else:
+            context['students'] = students
+
+        return context

@@ -2,7 +2,11 @@
 {% load static %}
 {% block css_style %}
 
-
+<link href="{% static "vendors/datatables.net-bs/css/dataTables.bootstrap.min.css" %} " rel="stylesheet">
+<link href="{% static "vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" %} " rel="stylesheet">
+<link href="{% static "vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" %} " rel="stylesheet">
+<link href="{% static "vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" %} " rel="stylesheet">
+<link href="{% static "vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" %} " rel="stylesheet">
 <!-- Datatables -->
 <link href="{% static 'vendors/datatables.net-bs/css/dataTables.bootstrap.min.css' %}" rel="stylesheet">
 <link href="{% static 'vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css' %}" rel="stylesheet">
@@ -15,23 +19,11 @@
     <div class="col-md-12 col-sm-12 col-xs-12" >
         <div class="page-title">
             <div class="">
-                <h3>{{form.student.label}} </h3>
+                <h3>Total de Estudiantes {{request.user.profile.institution|default_if_none:"Municipio de Rionegro"}}</h3>
             </div>
         </div>
     </div>
-    <div class="col-md-6">
-        <form method="POST">
-            {% csrf_token %}
-        <div class="input-group">
-            {{form.student}}
-            <span class="input-group-btn">
-                <button type="success" class="btn btn-primary">Buscar</button>
-            </span>
 
-        </div>
-    </form>
-
-    </div>
           <div class="clearfix"></div>
 
           <div class="row">
@@ -42,7 +34,8 @@
                 <div class="x_content">
                  
                   
-                  <table id="datatable-search" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                 
+                    <table width="100%"id="datatable-search" class="table table-striped table-bordered">
                     <thead>
                       <tr>
                         <th>Nombre</th>
@@ -89,25 +82,25 @@
   
 {% endblock content %}
 {% block js_scripts %}
-    
-    <!-- Datatables -->
-    <script src="{% static 'vendors/datatables.net/js/jquery.dataTables.min.js' %}" ></script>
-    <script src="{% static 'vendors/datatables.net-bs/js/dataTables.bootstrap.min.js' %}" ></script>
-    <script src="{% static 'vendors/datatables.net-buttons/js/dataTables.buttons.min.js' %}" ></script>
-    <script src="{% static 'vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js' %}" ></script>
-    <script src="{% static 'vendors/datatables.net-buttons/js/buttons.flash.min.js' %}" ></script>
-    <script src="{% static 'vendors/datatables.net-buttons/js/buttons.html5.min.js' %}" ></script>
-    <script src="{% static 'vendors/datatables.net-buttons/js/buttons.print.min.js' %}" ></script>
-    <script src="{% static 'vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js' %}" ></script>
-    <script src="{% static 'vendors/datatables.net-keytable/js/dataTables.keyTable.min.js' %}" ></script>
-    <script src="{% static 'vendors/datatables.net-responsive/js/dataTables.responsive.min.js' %}" ></script>
-    <script src="{% static 'vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js' %}" ></script>
-    <script src="{% static 'vendors/datatables.net-scroller/js/dataTables.scroller.min.js' %}" ></script>
-    <script src="{% static 'vendors/jszip/dist/jszip.min.js' %}" ></script>
-    <script src="{% static 'vendors/pdfmake/build/pdfmake.min.js' %}" ></script>
-    <script src="{% static 'vendors/pdfmake/build/vfs_fonts.js' %}" ></script>
-    
-        <script>  
+<!-- Datatables -->
+<script src="{% static "vendors/datatables.net/js/jquery.dataTables.min.js" %} "></script>
+<script src="{% static "vendors/datatables.net-bs/js/dataTables.bootstrap.min.js" %} "></script>
+<script src="{% static "vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js" %} "></script>
+<script src="{% static "vendors/datatables.net-keytable/js/dataTables.keyTable.min.js" %} "></script>
+<script src="{% static "vendors/datatables.net-responsive/js/dataTables.responsive.min.js" %} "></script>
+<script src="{% static "vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js" %} "></script>
+<script src="{% static "vendors/datatables.net-scroller/js/dataTables.scroller.min.js" %} "></script>
+
+
+<script src="{% static "vendors/Buttons-1.5.1/js/dataTables.buttons.min.js" %} "></script>
+<script src="{% static "vendors/Buttons-1.5.1/js/buttons.flash.min.js" %} "></script>
+<script src="{% static "vendors/JSZip-2.5.0/jszip.min.js" %} "></script>
+<script src="{% static "vendors/pdfmake-0.1.32/pdfmake.min.js" %} "></script>
+<script src="{% static "vendors/pdfmake-0.1.32/vfs_fonts.js" %} "></script>
+<script src="{% static "vendors/Buttons-1.5.1/js/buttons.html5.min.js" %} "></script>
+<script src="{% static "vendors/Buttons-1.5.1/js/buttons.print.min.js" %} "></script>
+<script>
+      
         $(document).ready(function () {
 
                 $(function () {
@@ -137,10 +130,18 @@
                   }
             
                   var table = $('#datatable-search').dataTable({
-                    language: idioma_espanol,
-                    stateSave: false,
-                    responsive: false,
-                  
+                        language: idioma_espanol,
+                        stateSave: false,
+                        responsive: false,
+                        dom: 'Blfrtip',
+
+                        buttons: [
+                            { extend: 'copy', text: 'Copiar', footer: true },
+                            { extend: 'print', text: 'Imprimir', messageTop: 'listado Reservas', footer: true },
+                            { extend: 'excel', text: 'Excel', messageTop: 'listado Reservas', footer: true },
+                            { extend: 'csv', text: 'CSV', footer: true },
+                            { extend: 'pdf', text: 'PDF', messageTop: 'listado Reservas', footer: true, orientation: 'landscape' },
+                            ]
                     
                     
                   });

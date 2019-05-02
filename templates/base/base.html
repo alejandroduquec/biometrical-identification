@@ -33,6 +33,8 @@
 
   <!-- Custom Theme Style -->
   <link href="{% static 'build/css/custom.min.css' %}" rel="stylesheet">
+<link href="{% static 'finger.css' %}" rel="stylesheet">
+
   {% block css_style %}
 
   {% endblock css_style %}
@@ -78,8 +80,8 @@
 
                 </li>
                 
-                <!-- <li><a href=""><i class="fa fa-users"></i> Registrar </a>
-                </li> -->
+                <li><a href="{% url 'students:report' %}"><i class="fa fa-users"></i> Estudiantes </a>
+                </li> 
 
               </ul>
             </div>
@@ -200,7 +202,8 @@
       <!-- footer content -->
       <footer>
         <div class="pull-right">
-          Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+            <strong>© - Powered by:
+            <a href="https://github.com/alejandroduquec"> Aduque</a></strong> 
         </div>
         <div class="clearfix"></div>
       </footer>
