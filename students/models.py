@@ -62,6 +62,3 @@ class DactilarIdentification(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     dactilar_md = models.BinaryField()
     dactilar_mi = models.BinaryField()
-
-    created = models.DateTimeField(auto_now_add=True)
-    modified = models.DateTimeField(auto_now=True)
