@@ -35,10 +35,13 @@ class IndexView(LoginRequiredMixin, TemplateView):
             pass
         else:
             context['total_students'] = students.all().count()
-            context['male'] = students.filter(gender='M').count()
-            context['female'] = students.filter(gender='F').count()
             context['total_students_registered'] = students.filter(
                 id__in=dactilar.all()).count()
+            active_user = (context['total_students_registered']/context['total_students'])*100
+            context['users_active'] = round(active_user, 2)
+
+
+
         return context
 
 

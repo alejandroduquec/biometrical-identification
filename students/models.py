@@ -12,18 +12,30 @@ GENDER_CHOICE = (
 )
 
 
+class TypeFood(models.Model):
+    """Food type model"""
+
+    name = models.CharField(max_length=30)
+
+    def __str__(self):
+        """return type food name"""
+        return '{}'.format(self.name)
+
+
 class TypeDocument(models.Model):
     """Document type model"""
+
     name = models.CharField(max_length=30)
     abreviation = models.CharField(max_length=2, null=True, blank=True)
 
     def __str__(self):
-        """return typedocument"""
+        """return type document"""
         return '{}'.format(self.name)
 
 
 class Student(models.Model):
     """Post model """
+
     document = models.CharField(max_length=50, unique=True)
     document_type = models.ForeignKey(
         TypeDocument, on_delete=models.DO_NOTHING)
@@ -59,6 +71,26 @@ class Student(models.Model):
 
 class DactilarIdentification(models.Model):
     """Dactilar information"""
+
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     dactilar_md = models.BinaryField()
     dactilar_mi = models.BinaryField()
+
+    def __str__(self):
+        """returr full name"""
+        return '{} {}'.format(self.student.first_name, self.student.last_name)
+
+
+class FoodRation(models.Model):
+    """Food Ration Model"""
+
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    food_time = models.DateTimeField(auto_now=False, auto_now_add=False)
+    food_type = models.ForeignKey(TypeFood, on_delete=models.DO_NOTHING)
+
+    # metadata
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
+
+
+
