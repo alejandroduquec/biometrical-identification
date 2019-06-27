@@ -42,7 +42,8 @@ class IndexView(LoginRequiredMixin, TemplateView):
             context['total_students'] = students.all().count()
             context['total_students_registered'] = students.filter(
                 id__in=dactilar.all()).count()
-            active_user = (context['total_students_registered']/context['total_students'])*100
+            active_user = (
+                context['total_students_registered']/context['total_students'])*100
             context['users_active'] = round(active_user, 2)
         return context
 
@@ -122,8 +123,8 @@ class ReportStudents(LoginRequiredMixin, TemplateView):
 
 class DeleteStudentView(LoginRequiredMixin, DeleteView):
     """Delete Student"""
-    template_name='users/delete_user.html'
-    context_object_name='object'
+    template_name = 'users/delete_user.html'
+    context_object_name = 'object'
 
     def get_object(self, queryset=None):
         """Get object to delete"""
@@ -132,7 +133,7 @@ class DeleteStudentView(LoginRequiredMixin, DeleteView):
 
     def get_success_url(self):
         """Return to list of  naturaleza"""
-        sweetify.success(self.request,'Usuario eliminado.')
+        sweetify.success(self.request, 'Usuario eliminado.')
         return reverse_lazy('students:search')
 
 
@@ -151,22 +152,23 @@ class FoodRationsView(LoginRequiredMixin, TemplateView):
             context['total_students_registered'] = students.filter(
                 id__in=dactilar.all()).count()
             context['total_rations'] = FoodRation.objects.all().count()
-            context['breakfast'] = FoodRation.objects.filter(food_type=1).count()
-            context['lunch'] =  context['total_rations'] - context['breakfast']
-            
+            context['breakfast'] = FoodRation.objects.filter(
+                food_type=1).count()
+            context['lunch'] = context['total_rations'] - context['breakfast']
 
-            institution_counter=FoodRation.objects.select_related('id')\
-                    .all()\
-                    .annotate(name=F('student__institution__name'))\
-                    .values('name')\
-                    .annotate(user_count=Count('name'))
+            institution_counter = FoodRation.objects.select_related('id')\
+                .all()\
+                .annotate(name=F('student__institution__name'))\
+                .values('name')\
+                .annotate(user_count=Count('name'))
             average = 0
-            if institution_counter:
+            if len(institution_counter) > 1:
                 for inst in list(institution_counter):
                     average += inst['user_count']
-                institution_counter[0]['user_count']=round((institution_counter[0]['user_count']/average)*100,1)
-                institution_counter[1]['user_count']=round((institution_counter[1]['user_count']/average)*100,1)
+                institution_counter[0]['user_count'] = round(
+                    (institution_counter[0]['user_count']/average)*100, 1)
+                institution_counter[1]['user_count'] = round(
+                    (institution_counter[1]['user_count']/average)*100, 1)
             context['institutions_data'] = institution_counter
-            
 
         return context
