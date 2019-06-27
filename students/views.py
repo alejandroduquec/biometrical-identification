@@ -172,3 +172,18 @@ class FoodRationsView(LoginRequiredMixin, TemplateView):
             context['institutions_data'] = institution_counter
 
         return context
+
+
+class ReportRationsView(LoginRequiredMixin, TemplateView):
+    """Reports for food ration View"""
+    template_name = 'ration-report.html'
+
+    def get_context_data(self, **kwargs):
+        """add data  to context"""
+        context = super().get_context_data(**kwargs)
+        rations = FoodRation.objects.all()
+        if self.request.user.profile.institution:
+            pass
+        else:
+            context['rations'] = rations
+        return context

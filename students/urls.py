@@ -23,6 +23,10 @@ urlpatterns = [
         view=views.ReportStudents.as_view(),
         name='report'),
     path(
+        route='reportes/',
+        view=views.ReportRationsView.as_view(),
+        name='ration-reports'),
+    path(
         route='raciones/',
         view=views.FoodRationsView.as_view(),
         name='rations'),
