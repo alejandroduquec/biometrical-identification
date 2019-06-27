@@ -161,10 +161,12 @@ class FoodRationsView(LoginRequiredMixin, TemplateView):
                     .values('name')\
                     .annotate(user_count=Count('name'))
             average = 0
-            for inst in list(institution_counter):
-                average += inst['user_count']
-            institution_counter[0]['user_count']=round((institution_counter[0]['user_count']/average)*100,1)
-            institution_counter[1]['user_count']=round((institution_counter[1]['user_count']/average)*100,1)
+            if institution_counter:
+                for inst in list(institution_counter):
+                    average += inst['user_count']
+                institution_counter[0]['user_count']=round((institution_counter[0]['user_count']/average)*100,1)
+                institution_counter[1]['user_count']=round((institution_counter[1]['user_count']/average)*100,1)
             context['institutions_data'] = institution_counter
+            
 
         return context
