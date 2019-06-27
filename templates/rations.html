@@ -1,0 +1,166 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% block css_style %}
+<!-- NProgress -->
+<link href="{% static 'vendors/nprogress/nprogress.css' %}" rel="stylesheet">
+{% endblock css_style %}
+{% block content %}
+
+<div class="row tile_count">
+    <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
+        <span class="count_top"><i class="fa fa-cutlery"></i> Total Raciones</span>
+        <div class="count green">{{total_rations}}</div>
+        <span class="count_bottom">Entregadas A la fecha</span>
+    </div>
+    <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
+        <span class="count_top"><i class="fa fa-coffee"></i> Refrigerios</span>
+        <div class="count">{{breakfast}}</div>
+    </div>
+    <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
+        <span class="count_top"><i class="fa fa-spoon"></i> Almuerzos</span>
+        <div class="count ">{{lunch}}</div>
+    </div>
+    <div class="col-md-3 col-sm-4 col-xs-6 tile_stats_count">
+        <span class="count_top"><i class="fa fa-user"></i> Usuarios Atendidos</span>
+        <div class="count">{{total_students_registered}}</div>
+        <span class="count_bottom"><i class="green"><i class="fa fa-bar-chart"></i></i> En total </span>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="col-md-8 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Resumen Porcentual</h2>
+
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+
+                    <div id="echart_pie_custom" style="height:350px;"></div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-xs-12 widget widget_tally_box">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>Top Instituciones</h2>
+                    
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content" style="height:355px;">
+
+                    <div style="text-align: center; margin-bottom: 17px">
+                        <ul class="verticle_bars list-inline">
+                           
+                            <li>
+                                <div class="progress vertical progress_wide bottom">
+                                    <div class="progress-bar progress-bar-info" role="progressbar"
+                                        data-transitiongoal="{{institutions_data.0.user_count}}"></div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="progress vertical progress_wide bottom">
+                                    <div class="progress-bar progress-bar-success" role="progressbar"
+                                        data-transitiongoal="{{institutions_data.1.user_count}}"></div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="divider"></div>
+
+                    <ul class="legend list-unstyled">
+                        
+                        <li>
+                            <p>
+                                <span class="icon"><i class="fa fa-square blue"></i></span> <span class="name">
+                                    {{institutions_data.0.name}} {{institutions_data.0.user_count}}%</span>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <span class="icon"><i class="fa fa-square green"></i></span> <span class="name">
+                                        {{institutions_data.1.name}} {{institutions_data.1.user_count}}%</span>
+                            </p>
+                        </li>
+                        
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+{% block js_scripts %}
+<!-- ECharts -->
+<script src="{% static 'vendors/echarts/dist/echarts.min.js' %}"></script>
+<script src="{% static 'vendors/echarts/map/js/world.js' %}"></script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        var theme = {
+            color: [
+                '#26B99A', '#34495E', '#BDC3C7', '#3498DB',
+                '#9B59B6', '#8abb6f', '#759c6a', '#bfd3b7'
+            ],
+
+        }
+        var echartPieCollapse = echarts.init(document.getElementById('echart_pie_custom'), theme);
+
+        echartPieCollapse.setOption({
+            tooltip: {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
+            },
+            legend: {
+                x: 'center',
+                y: 'bottom',
+                data: ['Refrigerio', 'Almuerzo']
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    magicType: {
+                        show: true,
+                        type: ['pie', 'funnel']
+                    },
+                    restore: {
+                        show: true,
+                        title: "Restore"
+                    },
+                    saveAsImage: {
+                        show: true,
+                        title: "Save Image"
+                    }
+                }
+            },
+            calculable: true,
+            series: [{
+                name: 'Area Mode',
+                type: 'pie',
+                radius: [25, 90],
+                center: ['50%', 170],
+                roseType: 'area',
+                x: '50%',
+                max: 100,
+                sort: 'ascending',
+                data: [{
+                    value: {{ breakfast }},
+                name: 'Refrigerio'
+                }, {
+                value: {{ lunch }},
+        name: 'Almuerzo'
+                }]
+            }]
+        });
+    });
+
+
+
+</script>
+
+{% endblock js_scripts %}

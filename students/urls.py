@@ -22,6 +22,16 @@ urlpatterns = [
         route='total/',
         view=views.ReportStudents.as_view(),
         name='report'),
+    path(
+        route='raciones/',
+        view=views.FoodRationsView.as_view(),
+        name='rations'),
+    path(
+        route='eliminar/<int:pk>/',
+        view=views.DeleteStudentView.as_view(),
+        name='delete'),
+
+
 
 
     # path(

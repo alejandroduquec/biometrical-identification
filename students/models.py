@@ -59,7 +59,7 @@ class Student(models.Model):
     def __str__(self):
         """returrn full name"""
         return '{} {}'.format(self.first_name, self.last_name)
-
+    
     def got_dactilar(self):
         """check dactilar identification"""
         dactilar = DactilarIdentification.objects.filter(student=self)
@@ -77,7 +77,7 @@ class DactilarIdentification(models.Model):
     dactilar_mi = models.BinaryField()
 
     def __str__(self):
-        """returr full name"""
+        """return full name"""
         return '{} {}'.format(self.student.first_name, self.student.last_name)
 
 
@@ -91,6 +91,9 @@ class FoodRation(models.Model):
     # metadata
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
+    def __str__(self):
+        """return user and food name"""
+        return '{} {} / {}'.format(self.student.first_name, self.student.last_name, self.food_type)
 
 
 
