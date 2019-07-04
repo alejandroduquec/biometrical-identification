@@ -59,7 +59,7 @@ class Student(models.Model):
     def __str__(self):
         """returrn full name"""
         return '{} {}'.format(self.first_name, self.last_name)
-    
+
     def got_dactilar(self):
         """check dactilar identification"""
         dactilar = DactilarIdentification.objects.filter(student=self)
@@ -91,9 +91,19 @@ class FoodRation(models.Model):
     # metadata
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
+
     def __str__(self):
         """return user and food name"""
         return '{} {} / {}'.format(self.student.first_name, self.student.last_name, self.food_type)
 
 
+class ModifiedFingerPrint(models.Model):
+    """Modified Finger Print"""
 
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    state = models.CharField(max_length=5)
+    datetime = models.DateTimeField(auto_now=False, auto_now_add=False)
+
+    def __str__(self):
+        """return user with modified finger print"""
+        return self.student
