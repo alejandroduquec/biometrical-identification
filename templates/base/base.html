@@ -84,9 +84,10 @@
                 </li> 
                 
                 <li><a><i class="fa fa-cutlery"></i> Raciones Alimenticias<span class="fa fa-chevron-down"></span></a>
-                  <ul class="nav child_menu" style="">
+                  <ul class="nav child_menu">
                   <li><a href="{% url 'students:rations' %}">Resumen</a></li>
-                  <li><a href="{% url 'students:ration-reports' %}">Informes</a></li>
+                  <li><a href="{% url 'students:ration-reports' %}">Lista Entregas</a></li>
+                  <li><a href="{% url 'students:generate-pdf' %}">Reportes PDF</a></li>
                   
                   
                   </ul>

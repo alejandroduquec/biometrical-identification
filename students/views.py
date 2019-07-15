@@ -15,16 +15,21 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.db.models import Count
 from django.utils import timezone
+from django.template.loader import get_template
 
 
 # Views
 from students import views
+
 # Model
 from students.models import Student, DactilarIdentification, FoodRation
+
 # Forms
 from students.forms import SearchStudentForm, RegisterStudentForm
+
 # Utils
 import sweetify
+from students.utils import render_to_pdf
 
 
 class IndexView(LoginRequiredMixin, TemplateView):
@@ -187,3 +192,23 @@ class ReportRationsView(LoginRequiredMixin, TemplateView):
         else:
             context['rations'] = rations
         return context
+
+
+def GeneratePDFView(request):
+    """Generate PDF Reports"""
+    context={
+        'size':19,
+        'size2':16,
+    }
+    template = get_template('format/example2.html')
+    html = template.render(context)
+    pdf = render_to_pdf('format/example2.html', context)
+    response = HttpResponse(pdf, content_type='application/pdf')
+    filename = "respuesta_tramite.pdf" 
+    content = "inline; filename='%s'" %(filename)
+    download = request.GET.get("download")
+    if download:
+        content = "attachment; filename='%s'" %(filename)
+    response['Content-Disposition'] = content
+    return response
+
