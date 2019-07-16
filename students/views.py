@@ -41,8 +41,16 @@ class IndexView(LoginRequiredMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         students = Student.objects
         dactilar = DactilarIdentification.objects
-        if self.request.user.profile.institution:
-            pass
+        user_intitution = self.request.user.profile.institution
+        if user_intitution:
+            total_students_by_instit = students.filter(
+                institution=user_intitution)
+            context['total_students'] = total_students_by_instit.count()
+            context['total_students_registered'] = dactilar.filter(
+                id__in=total_students_by_instit).count()
+            active_user = (
+                context['total_students_registered']/context['total_students'])*100
+            context['users_active'] = round(active_user, 2)
         else:
             context['total_students'] = students.all().count()
             context['total_students_registered'] = students.filter(
