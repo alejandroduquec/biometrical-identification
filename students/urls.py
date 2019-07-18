@@ -31,6 +31,10 @@ urlpatterns = [
         view=views.FoodRationsView.as_view(),
         name='rations'),
     path(
+        route='eliminar-estudiante/<int:pk>/',
+        view=views.DeleteStudentView,
+        name='delete'),
+    path(
         route='generate-pdf/',
         view=views.GeneratePDFView,
         name='generate-pdf'),

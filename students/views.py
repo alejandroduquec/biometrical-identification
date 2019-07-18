@@ -62,6 +62,9 @@ class IndexView(LoginRequiredMixin, TemplateView):
 
 
 def identification_name(student_data):
+    """Search user by firstname or lastname
+    [student_data]:user name or lastname
+    """
     if student_data.isnumeric():
         students = Student.objects.filter(
             Q(document__icontains=student_data))
@@ -80,10 +83,17 @@ def identification_name(student_data):
     return students
 
 
+def exclude_institution(inst):
+    """Switch id to exclude institution"""
+    if inst.id == 1:
+        return 2
+    else:
+        return 1
+
+
 class SearchStudent(LoginRequiredMixin, FormView):
     template_name = 'search.html'
     form_class = SearchStudentForm
-    # TODO: filter by institution profile and sweerify, responsive table
 
     def post(self, request, *args, **kwargs):
         """On post to do"""
@@ -91,7 +101,10 @@ class SearchStudent(LoginRequiredMixin, FormView):
         if form.is_valid():
             data = form.cleaned_data
             student_data = data.get('student')
+            user_institution = request.user.profile.institution
             students = identification_name(student_data)
+            if user_institution:
+                students = students.exclude(institution=exclude_institution(user_institution))
             if students:
                 sweetify.success(
                     request, 'Éxito', text='La busqueda ha finalizado', persistent='Listo')
@@ -126,11 +139,13 @@ class ReportStudents(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         """add data  to context"""
         context = super().get_context_data(**kwargs)
-        students = Student.objects.all()
-        if self.request.user.profile.institution:
-            pass
+        user_institution = self.request.user.profile.institution
+        if user_institution:
+            students = Student.objects.filter(institution=user_institution.id)
         else:
-            context['students'] = students
+            students = Student.objects.all()
+
+        context['students'] = students
         return context
 
 
@@ -159,8 +174,22 @@ class FoodRationsView(LoginRequiredMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         students = Student.objects
         dactilar = DactilarIdentification.objects
-        if self.request.user.profile.institution:
-            pass
+        user_institution = self.request.user.profile.institution        
+        if user_institution:
+            total_students_by_instit = students.filter(
+                institution=user_institution)
+            context['total_students_registered'] = dactilar.filter(
+                id__in=total_students_by_instit).count()
+            context['total_rations'] = FoodRation.objects.filter(
+                student__in=total_students_by_instit
+            ).count()
+            context['breakfast'] = FoodRation.objects.filter(
+                food_type=1,
+                student__in=total_students_by_instit
+                ).count()
+            context['lunch'] = context['total_rations'] - context['breakfast']
+
+            
         else:
             context['total_students_registered'] = students.filter(
                 id__in=dactilar.all()).count()
@@ -169,20 +198,20 @@ class FoodRationsView(LoginRequiredMixin, TemplateView):
                 food_type=1).count()
             context['lunch'] = context['total_rations'] - context['breakfast']
 
-            institution_counter = FoodRation.objects.select_related('id')\
-                .all()\
-                .annotate(name=F('student__institution__name'))\
-                .values('name')\
-                .annotate(user_count=Count('name'))
-            average = 0
-            if len(institution_counter) > 1:
-                for inst in list(institution_counter):
-                    average += inst['user_count']
-                institution_counter[0]['user_count'] = round(
-                    (institution_counter[0]['user_count']/average)*100, 1)
-                institution_counter[1]['user_count'] = round(
-                    (institution_counter[1]['user_count']/average)*100, 1)
-            context['institutions_data'] = institution_counter
+        institution_counter = FoodRation.objects.select_related('id')\
+            .all()\
+            .annotate(name=F('student__institution__name'))\
+            .values('name')\
+            .annotate(user_count=Count('name'))
+        average = 0
+        if len(institution_counter) > 1:
+            for inst in list(institution_counter):
+                average += inst['user_count']
+            institution_counter[0]['user_count'] = round(
+                (institution_counter[0]['user_count']/average)*100, 1)
+            institution_counter[1]['user_count'] = round(
+                (institution_counter[1]['user_count']/average)*100, 1)
+        context['institutions_data'] = institution_counter
 
         return context
 
@@ -194,11 +223,15 @@ class ReportRationsView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         """add data  to context"""
         context = super().get_context_data(**kwargs)
-        rations = FoodRation.objects.all()
-        if self.request.user.profile.institution:
-            pass
+        user_institution = self.request.user.profile.institution        
+        if user_institution:
+            total_students_by_instit = Student.objects.filter(
+                institution=user_institution)
+            rations = FoodRation.objects.filter(student__in=total_students_by_instit)
         else:
-            context['rations'] = rations
+            rations = FoodRation.objects.all()
+
+        context['rations'] = rations
         return context
 
 
