@@ -22,7 +22,7 @@ from django.template.loader import get_template
 from students import views
 
 # Model
-from students.models import Student, DactilarIdentification, FoodRation
+from students.models import Student, DactilarIdentification, FoodRation, Institution
 
 # Forms
 from students.forms import SearchStudentForm, RegisterStudentForm
@@ -30,6 +30,10 @@ from students.forms import SearchStudentForm, RegisterStudentForm
 # Utils
 import sweetify
 from students.utils import render_to_pdf
+import calendar
+import datetime
+
+weekend = ['Saturday', 'Sunday']
 
 
 class IndexView(LoginRequiredMixin, TemplateView):
@@ -237,13 +241,29 @@ class ReportRationsView(LoginRequiredMixin, TemplateView):
 
 def GeneratePDFView(request):
     """Generate PDF Reports"""
-    context={
-        'size':19,
-        'size2':16,
+    month = timezone.now().month
+    institution = Institution.objects.get(id=1)
+    max_days = calendar.monthrange(2019,timezone.now().month)[1]
+    week_days = []
+    for day in range(1, max_days+1):
+        evaluated_day = '2019-{}-{}'.format(month, day)
+        name_day = datetime.datetime.strptime(evaluated_day, '%Y-%m-%d').strftime("%A")
+        if not name_day in weekend:
+            week_days.append(datetime.datetime.strptime(evaluated_day, '%Y-%m-%d'))
+    if len(week_days) < 24:
+        for i in range(len(week_days), 25):
+            week_days.append(0)
+    #rations = FoodRation.objects.values('student__id','food_type').annotate(food=Count('student'))
+    context = {
+        'departament': 'Antioquia',
+        'institution': institution,
+        'month': timezone.now(),
+        'week_days': week_days
     }
-    template = get_template('format/example2.html')
+
+    template = get_template('format/food.html')
     html = template.render(context)
-    pdf = render_to_pdf('format/example2.html', context)
+    pdf = render_to_pdf('format/food.html', context)
     response = HttpResponse(pdf, content_type='application/pdf')
     filename = "respuesta_tramite.pdf" 
     content = "inline; filename='%s'" %(filename)

@@ -1,10 +1,15 @@
 """Students models"""
+
 # Django
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
+
 # Models
 from users.models import Institution
 
+# Utils
+import datetime
 
 GENDER_CHOICE = (
     ('M', 'Masculino'),
@@ -68,6 +73,25 @@ class Student(models.Model):
         else:
             return False
 
+    def names(self):
+        """first name split"""
+        names = self.first_name.split(' ')
+        if len(names) <= 1:
+            return [self.first_name, '']
+        return [names[0], names[1]]
+
+    def last_names(self):
+        """last_name split"""
+        names = self.last_name.split(' ')
+        if len(names) <= 1:
+            return [self.last_name, '']
+        return [names[0], names[1]]
+    
+    def age(self):
+        """Return user age"""
+        age = int(((datetime.date.today() - self.birthdate).days)/365)
+        return age
+        
 
 class DactilarIdentification(models.Model):
     """Dactilar information"""

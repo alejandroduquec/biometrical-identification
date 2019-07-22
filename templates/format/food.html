@@ -1,0 +1,941 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+
+<head>
+
+   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+   <title></title>
+   <meta name="generator" content="LibreOffice 6.2.5.2 (MacOSX)" />
+   <meta name="author" content="Margarita Maria Restrepo Guzman" />
+   <meta name="created" content="2003-08-20T17:16:17" />
+   <meta name="changed" content="2019-07-21T15:08:57.783393511" />
+   <meta name="AppVersion" content="16.0300" />
+   <meta name="Company" content="ICBF" />
+   <meta name="DocSecurity" content="0" />
+   <meta name="HyperlinksChanged" content="false" />
+   <meta name="LinksUpToDate" content="false" />
+   <meta name="Owner" content="" />
+   <meta name="SPSDescription" content="" />
+   <meta name="ScaleCrop" content="false" />
+   <meta name="ShareDoc" content="false" />
+   <meta name="Status" content="" />
+
+   <style type="text/css">
+      @page {
+         size: legal landscape;
+         
+      }
+
+      body,
+      div,
+      table,
+      thead,
+      tbody,
+      tfoot,
+      tr,
+      th,
+      td,
+      p {
+         font-family: "Arial";
+         font-size: x-small
+      }
+
+   </style>
+
+</head>
+
+<body>
+   <table cellspacing="0" border="0" style="margin:2px">
+    
+      <tr>
+         <td style="border-top: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+            colspan=37 height="28" align="center" valign=bottom bgcolor="#000000"><b>
+               <font size=4 color="#FFFFFF">Formato - REGISTRO Y CONTROL DIARIO DE ASISTENCIA</font>
+            </b></td>
+      </tr>
+      <tr>
+            <td style="border-left: 1px solid #000000" colspan=4 height="47" align="left" valign=bottom><b>
+                  <font size=3>DEPARTAMENTO: {{departament}} </font>
+               </b></td>
+            <td colspan=7 align="left" valign=bottom><b>
+                  <font size=3>CÓDIGO DANE: 12 </font>
+               </b></td>
+            
+            <td colspan=20 align="left" valign=bottom><b>
+                  <font size=3>NOMBRE DE INSTITUCIÓN O CENTRO EDUCATIVO: {{institution}} </font>
+               </b></td>
+      </tr>
+      <tr>
+         <td style="border-left: 1px solid #000000" colspan=4 height="47" align="left" valign=bottom><b>
+               <font size=3>MUNICIPIO: Rionegro</font>
+            </b></td>
+         <td colspan=7 align="left" valign=bottom><b>
+               <font size=3>CÓDIGO DANE: 123 </font>
+            </b></td>
+         
+         <td colspan=20 align="left" valign=bottom><b>
+               <font size=3>CÓDIGO DANE DE INSTITUCIÓN O CENTRO EDUCATIVO: 34 </font>
+            </b></td>
+      </tr>
+      <tr>
+         <td style="border-left: 1px solid #000000" colspan=4 height="47" align="left" valign=bottom><b>
+               <font size=3>OPERADOR: 23</font>
+            </b></td>
+         <td  colspan=7 height="47" align="left" valign=bottom  align="center" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td colspan=4 height="47" align="left" valign=bottom  align="center" valign=bottom><b>
+               <font size=3>MES DE ATENCIÓN: {{month|date:"F" }}</font>
+            </b></td>
+         <td colspan=4 height="47" align="left" valign=bottom  align="center" valign=bottom><b>
+               <font size=3>AÑO: 2019</font>
+            </b></td>
+      </tr>
+      <tr>
+         <td style="border-left: 1px solid#000000" colspan=4 height="47" align="left" valign=bottom><b>
+               <font size=3>CONTRATO No.12</font>
+            </b></td>
+         <td colspan=2 align="center" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td colspan=25 align="center" valign=bottom><b>
+               <font size=3><br></font>
+            </b></td>
+      </tr>
+      <tr>
+         <td style="border-bottom: 2px solid #000000; border-left: 1px solid #000000" colspan=4 height="47"
+            align="center" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-bottom: 2px solid #000000" colspan=2 align="center" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-bottom: 2px solid #000000" colspan=25 align="center" valign=bottom>
+            <font size=3><br></font>
+         </td>
+      </tr>
+      <tr style="height: 40">
+         <td  width="4%" style="border-top: 2px solid #000000; border-bottom: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000; "
+            rowspan=3  align="center" valign=middle bgcolor="#A6A6A6"><b>
+               <font size=3>N°</font>
+            </b></td>
+         <td  width="20%" style="border: 2px solid #000000; margin:1px"
+            rowspan=3 align="center" valign=middle bgcolor="#A6A6A6"><b>
+               <font size=3>TIPO DE DOCUMENTO</font>
+            </b></td>
+         <td width="20%" style="border: 2px solid #000000; margin:1px"   rowspan=3 align="center" valign=middle bgcolor="#A6A6A6"><b>
+               <font size=3>NÚMERO DE DOCUMENTO DE IDENTIDAD</font>
+            </b></td>
+         <td width="20%" style="border: 2px solid #000000; margin:1px" rowspan=3 align="center" valign=middle bgcolor="#A6A6A6"><b>
+               <font size=3>PRIMER NOMBRE DEL TITULAR DE DERECHO</font>
+            </b></td>
+         <td width="20%" style="border: 2px solid #000000; margin:1px"  rowspan=3 align="center" valign=middle bgcolor="#A6A6A6"><b>
+               <font size=3>SEGUNDO NOMBRE DEL TITULAR DE DERECHO</font>
+            </b></td>
+         <td width="20%" style="border: 2px solid #000000; margin:1px"  rowspan=3 align="center" valign=middle bgcolor="#A6A6A6"><b>
+               <font size=3>PRIMER APELLIDO DEL TITULAR DE DERECHO</font>
+            </b></td>
+         <td width="20%" style="border: 2px solid #000000; margin:1px"  rowspan=3 align="center" valign=middle bgcolor="#A6A6A6"><b>
+               <font size=3>SEGUNDO APELLIDO DEL TITULAR DE DERECHO</font>
+            </b></td>
+         <td width="10%" style="border: 2px solid #000000; margin:1px"  rowspan=3 align="center" valign=middle bgcolor="#A6A6A6"><b>
+               <font size=3>EDAD</font>
+            </b></td>
+         <td width="20%" style="border: 2px solid #000000; margin:1px" rowspan=3 align="center" valign=middle bgcolor="#A6A6A6"><b>
+               <font size=3>PERTENENCIA ÉTNICA</font>
+            </b></td>
+         <td width="10%" style="border: 2px solid #000000; margin:2px"   rowspan=3 align="center" valign=middle bgcolor="#A6A6A6"><b>
+               <font size=3>Sexo</font>
+            </b></td>
+         <td width="20%" style="border: 2px solid #000000; margin:2px" rowspan=3 align="center" valign=middle bgcolor="#A6A6A6"><b>
+               <font size=3> Grado Educativo</font>
+            </b></td>
+         <td width="20%" style="border: 2px solid #000000; margin:2px"  rowspan=3 align="center" valign=middle bgcolor="#A6A6A6"><b>
+               <font size=3>Tipo de complemento</font>
+            </b></td>
+         <td   width="10%"style="border-top: 2px solid #000000; border-left: 2px solid #000000; border-right: 1px solid #000000"
+            colspan=25 align="center" valign=middle bgcolor="#A6A6A6"><b>
+               <font size=3>FECHA DE ENTREGA - Escriba el día hábil al cual corresponde la entrega del Complemento
+                  Alimentario
+               </font>
+            </b>
+         </td>
+      </tr>
+      <tr style="height: 40">
+         {% if week_days %}
+         {% for day  in week_days  %}
+         {% if day != 0 %}
+           
+         
+         <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+            align="left" valign=middle><b>
+               <font size=3>{{day|date:"d" }}</font>
+            </b></td>
+            {% endif %}
+         {% endfor %}
+         {% endif %}
+         
+        
+         <td style="border-top: 1px solid #000000; border-bottom: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+            colspan=2 rowspan=2 align="center" valign=middle bgcolor="#A6A6A6"><b>
+               <font size=3>Total días de consumo </font>
+            </b></td>
+      </tr>
+      <tr>
+         <td style="border-bottom: 2px solid #000000; border-left: 2px solid #000000; border-right: 1px solid #000000"
+            colspan=23 align="center" valign=middle bgcolor="#A6A6A6"><b>
+               <font size=3>Número de días de atención - Marque con una X el día que el Titular de Derecho recibe el
+                  complemento alimentario</font>
+            </b></td>
+        
+      </tr>
+      <!-- data user -->
+      {% if rations %}
+      {% for ration in rations %}
+        
+    
+      <tr>
+            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+               height="47" align="center" valign=bottom>
+               <font size=3>{{forloop.counter}}</font>
+            </td>
+            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-right: 1px solid #000000"
+               align="center" valign=bottom>
+               <font size=3>{{ration.student.document_type}}</font>
+            </td>
+            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000"
+               align="center" valign=bottom>
+               <font size=3>{{ration.student.document}}</font>
+            </td>
+            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+               align="left" valign=bottom>
+               <font size=3>{{ration.student.names.0|title}}</font>
+            </td>
+            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+               align="left" valign=bottom>
+               <font size=3>{{ration.student.names.1|title}}</font>
+            </td>
+            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+               align="left" valign=bottom>
+               <font size=3>{{ration.student.last_names.0|title}}</font>
+            </td>
+            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+               align="left" valign=bottom>
+               <font size=3>{{ration.student.last_names.1|title}}</font>
+            </td>
+            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+               align="left" valign=bottom>
+               <font size=3>{{ration.student.age}}</font>
+            </td>
+            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+               align="left" valign=bottom>
+               <font size=3><br></font>
+            </td>
+            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+               align="left" valign=bottom>
+               <font size=3>{{ration.student.gender}}</font>
+            </td>
+            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+               align="left" valign=bottom>
+               <font size=3>{{ration.student.grade}}</font>
+            </td>
+            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000"
+               align="left" valign=bottom>
+               <font size=3>{{ration.food_type}}</font>
+            </td>
+            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+               align="left" valign=bottom>
+               <font size=3><br></font>
+            </td>
+            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+               align="left" valign=bottom>
+               <font size=3><br></font>
+            </td>
+            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+               align="left" valign=bottom>
+               <font size=3><br></font>
+            </td>
+            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+               align="left" valign=bottom>
+               <font size=3><br></font>
+            </td>
+            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+               align="left" valign=bottom>
+               <font size=3><br></font>
+            </td>
+            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+               align="left" valign=bottom>
+               <font size=3><br></font>
+            </td>
+            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+               align="left" valign=bottom>
+               <font size=3><br></font>
+            </td>
+            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+               align="left" valign=bottom>
+               <font size=3><br></font>
+            </td>
+            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+               align="left" valign=bottom>
+               <font size=3><br></font>
+            </td>
+            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+               align="left" valign=bottom>
+               <font size=3><br></font>
+            </td>
+            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+               align="left" valign=bottom>
+               <font size=3><br></font>
+            </td>
+            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+               align="left" valign=bottom>
+               <font size=3><br></font>
+            </td>
+            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+               align="left" valign=bottom>
+               <font size=3><br></font>
+            </td>
+            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+               align="left" valign=bottom>
+               <font size=3><br></font>
+            </td>
+            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+               align="left" valign=bottom>
+               <font size=3><br></font>
+            </td>
+            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+               align="left" valign=bottom>
+               <font size=3><br></font>
+            </td>
+            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+               align="left" valign=bottom>
+               <font size=3><br></font>
+            </td>
+            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+               align="left" valign=bottom>
+               <font size=3><br></font>
+            </td>
+            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+               align="left" valign=bottom>
+               <font size=3><br></font>
+            </td>
+            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+               align="left" valign=bottom>
+               <font size=3><br></font>
+            </td>
+            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+               align="left" valign=bottom>
+               <font size=3><br></font>
+            </td>
+            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+               align="left" valign=middle>
+               <font size=3><br></font>
+            </td>
+            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+               align="left" valign=middle>
+               <font size=3><br></font>
+            </td>
+            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+               colspan=2 align="center" valign=middle>
+               <font size=3><br></font>
+            </td>
+         </tr>
+         {% endfor %}
+        
+      {% endif %}
+
+
+      <tr>
+         <td style="border-top: 1px solid #000000; border-bottom: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+            height="47" align="center" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-top: 1px solid #000000; border-bottom: 2px solid #000000; border-right: 1px solid #000000"
+            align="center" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-top: 1px solid #000000; border-bottom: 2px solid #000000; border-left: 1px solid #000000"
+            align="center" valign=middle><b>
+               <font size=3><br></font>
+            </b></td>
+         <td style="border-top: 1px solid #000000; border-bottom: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+            align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-top: 1px solid #000000; border-bottom: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+            align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-top: 1px solid #000000; border-bottom: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+            align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-top: 1px solid #000000; border-bottom: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+            align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-top: 1px solid #000000; border-bottom: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+            align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-top: 1px solid #000000; border-bottom: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+            align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-top: 1px solid #000000; border-bottom: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+            align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-top: 1px solid #000000; border-bottom: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+            align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-top: 1px solid #000000; border-bottom: 2px solid #000000; border-left: 1px solid #000000"
+            align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-top: 1px solid #000000; border-bottom: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+            align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-top: 1px solid #000000; border-bottom: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+            align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-top: 1px solid #000000; border-bottom: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+            align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-top: 1px solid #000000; border-bottom: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+            align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-top: 1px solid #000000; border-bottom: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+            align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-top: 1px solid #000000; border-bottom: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+            align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-top: 1px solid #000000; border-bottom: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+            align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-top: 1px solid #000000; border-bottom: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+            align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-top: 1px solid #000000; border-bottom: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+            align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-top: 1px solid #000000; border-bottom: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+            align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-top: 1px solid #000000; border-bottom: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+            align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-top: 1px solid #000000; border-bottom: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+            align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-top: 1px solid #000000; border-bottom: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+            align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-top: 1px solid #000000; border-bottom: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+            align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-top: 1px solid #000000; border-bottom: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+            align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-top: 1px solid #000000; border-bottom: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+            align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-top: 1px solid #000000; border-bottom: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+            align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-top: 1px solid #000000; border-bottom: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+            align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-top: 1px solid #000000; border-bottom: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+            align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-top: 1px solid #000000; border-bottom: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+            align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-top: 1px solid #000000; border-bottom: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+            align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-top: 1px solid #000000; border-bottom: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+            align="left" valign=middle>
+            <font size=3><br></font>
+         </td>
+         <td style="border-top: 1px solid #000000; border-bottom: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+            align="left" valign=middle>
+            <font size=3><br></font>
+         </td>
+         <td style="border-top: 1px solid #000000; border-bottom: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+            colspan=2 align="center" valign=middle>
+            <font size=3><br></font>
+         </td>
+      </tr>
+      
+
+      <tr>
+         <td style="border-top: 2px solid #000000; border-left: 1px solid #000000" colspan=4 height="47" align="center"
+            valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-top: 2px solid #000000" colspan=3 align="center" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-top: 2px solid #000000" colspan=4 align="center" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-top: 2px solid #000000" colspan=4 align="center" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-top: 2px solid #000000" colspan=4 align="center" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-top: 2px solid #000000; border-right: 1px solid #000000" colspan=11 rowspan=8 align="center"
+            valign=bottom>
+            <font size=3><br></font>
+         </td>
+      </tr>
+      
+      <tr>
+         <td style="border-left: 1px solid #000000" colspan=4 height="47" align="left" valign=bottom><b>
+               <font size=3>RACIONES MENSUALES PROGRAMADAS CAJM </font>
+            </b></td>
+         <td colspan=3 align="left" valign=bottom><b>
+               <font size=3>RACIONES MENSUALES ENTREGADAS CAJM </font>
+            </b></td>
+         <td align="left" valign=bottom>
+            <font size=4><br></font>
+         </td>
+         <td align="left" valign=bottom>
+            <font size=4><br></font>
+         </td>
+         <td style="border-right: 1px solid #000000" colspan=4 align="right" valign=bottom><b>
+               <font size=4>PREPARADA EN SITIO</font>
+            </b></td>
+         <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+            align="left" valign=bottom>
+            <font size=4><br></font>
+         </td>
+         <td align="left" valign=bottom>
+            <font size=4><br></font>
+         </td>
+         <td colspan=4 align="right" valign=bottom><b>
+               <font size=4>CATERING</font>
+            </b></td>
+         <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+            align="left" valign=bottom>
+            <font size=4><br></font>
+         </td>
+         <td align="left" valign=bottom>
+            <font size=4><br></font>
+         </td>
+         <td style="border-right: 1px solid #000000" colspan=4 align="right" valign=bottom><b>
+               <font size=4>CATERING</font>
+            </b></td>
+         <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+            align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+      </tr>
+      <tr>
+         <td style="border-left: 1px solid #000000" colspan=4 height="47" align="center" valign=bottom>
+            <font size=4><br></font>
+         </td>
+         <td colspan=3 align="center" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td align="left" valign=bottom>
+            <font size=4><br></font>
+         </td>
+         <td align="left" valign=bottom>
+            <font size=4><br></font>
+         </td>
+         <td colspan=4 align="center" valign=bottom>
+            <font size=4><br></font>
+         </td>
+         <td align="left" valign=bottom>
+            <font size=4><br></font>
+         </td>
+         <td align="left" valign=bottom>
+            <font size=4><br></font>
+         </td>
+         <td colspan=4 align="center" valign=bottom>
+            <font size=4><br></font>
+         </td>
+         <td align="left" valign=bottom>
+            <font size=4><br></font>
+         </td>
+         <td align="left" valign=bottom>
+            <font size=4><br></font>
+         </td>
+         <td colspan=4 align="center" valign=bottom>
+            <font size=4><br></font>
+         </td>
+         <td align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+      </tr>
+      <tr>
+         <td style="border-left: 1px solid #000000" colspan=4 height="47" align="left" valign=bottom><b>
+               <font size=3>RACIONES MENSUALES PROGRAMADAS CAJT </font>
+            </b></td>
+         <td colspan=3 align="left" valign=bottom><b>
+               <font size=3>RACIONES MENSUALES ENTREGADAS CAJT </font>
+            </b></td>
+         <td align="left" valign=bottom>
+            <font size=4><br></font>
+         </td>
+         <td align="left" valign=bottom>
+            <font size=4><br></font>
+         </td>
+         <td style="border-right: 1px solid #000000" colspan=4 align="right" valign=bottom><b>
+               <font size=4>PREPARADA EN SITIO</font>
+            </b></td>
+         <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+            align="left" valign=bottom>
+            <font size=4><br></font>
+         </td>
+         <td align="left" valign=bottom>
+            <font size=4><br></font>
+         </td>
+         <td colspan=4 align="right" valign=bottom><b>
+               <font size=4>CATERING</font>
+            </b></td>
+         <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+            align="left" valign=bottom>
+            <font size=4><br></font>
+         </td>
+         <td align="left" valign=bottom>
+            <font size=4><br></font>
+         </td>
+         <td style="border-right: 1px solid #000000" colspan=4 align="right" valign=bottom><b>
+               <font size=4>CATERING</font>
+            </b></td>
+         <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+            align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+      </tr>
+      <tr>
+         <td style="border-left: 1px solid #000000" colspan=4 height="47" align="center" valign=bottom>
+            <font size=4><br></font>
+         </td>
+         <td colspan=3 align="center" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td align="left" valign=bottom>
+            <font size=4><br></font>
+         </td>
+         <td align="left" valign=bottom>
+            <font size=4><br></font>
+         </td>
+         <td colspan=4 align="center" valign=bottom>
+            <font size=4><br></font>
+         </td>
+         <td align="left" valign=bottom>
+            <font size=4><br></font>
+         </td>
+         <td align="left" valign=bottom>
+            <font size=4><br></font>
+         </td>
+         <td colspan=4 align="center" valign=bottom>
+            <font size=4><br></font>
+         </td>
+         <td align="left" valign=bottom>
+            <font size=4><br></font>
+         </td>
+         <td align="left" valign=bottom>
+            <font size=4><br></font>
+         </td>
+         <td colspan=4 align="center" valign=bottom>
+            <font size=4><br></font>
+         </td>
+         <td align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+      </tr>
+      <tr>
+         <td style="border-left: 1px solid #000000" colspan=4 height="47" align="left" valign=bottom><b>
+               <font size=3>RACIONES MENSUALES PROGRAMADAS ALMUERZO </font>
+            </b></td>
+         <td colspan=3 align="left" valign=bottom><b>
+               <font size=3>RACIONES MENSUALES ENTREGADAS ALMUERZO  </font>
+            </b></td>
+         <td align="left" valign=bottom>
+            <font size=4><br></font>
+         </td>
+         <td align="left" valign=bottom>
+            <font size=4><br></font>
+         </td>
+         <td style="border-right: 1px solid #000000" colspan=4 align="right" valign=bottom><b>
+               <font size=4>PREPARADA EN SITIO</font>
+            </b></td>
+            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+            align="left" valign=bottom>
+            <font size=4><br></font>
+         </td>
+         <td align="left" valign=bottom>
+            <font size=4><br></font>
+         </td>
+         <td colspan=4 align="right" valign=bottom><b>
+               <font size=4>CATERING</font>
+            </b></td>
+         <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+            align="left" valign=bottom>
+            <font size=4><br></font>
+         </td>
+         <td align="left" valign=bottom>
+            <font size=4><br></font>
+         </td>
+         <td style="border-right: 1px solid #000000" colspan=4 align="right" valign=bottom><b>
+               <font size=4>CATERING</font>
+            </b></td>
+         <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+            align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+      </tr>
+      <tr>
+         <td style="border-left: 1px solid #000000" colspan=4 height="47" align="center" valign=bottom>
+            <font size=4><br></font>
+         </td>
+         <td colspan=3 align="center" valign=bottom><b>
+               <font size=3><br></font>
+            </b></td>
+         <td align="left" valign=bottom><b>
+               <font size=3><br></font>
+            </b></td>
+         <td align="left" valign=bottom><b>
+               <font size=3><br></font>
+            </b></td>
+         <td colspan=4 align="center" valign=bottom><b>
+               <font size=3><br></font>
+            </b></td>
+         <td align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td colspan=4 align="center" valign=bottom><b>
+               <font size=3><br></font>
+            </b></td>
+         <td align="left" valign=bottom><b>
+               <font size=3><br></font>
+            </b></td>
+         <td align="left" valign=bottom><b>
+               <font size=3><br></font>
+            </b></td>
+         <td colspan=4 align="center" valign=bottom><b>
+               <font size=3><br></font>
+            </b></td>
+         <td align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+      </tr>
+      <tr>
+         <td style="border-left: 1px solid #000000" colspan=4 height="47" align="center" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td colspan=3 align="center" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td colspan=4 align="center" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td colspan=4 align="center" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td colspan=4 align="center" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+      </tr>
+      <tr>
+         <td style="border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+            colspan=37 height="47" align="left" valign=middle sdnum="1033;0;0%"><b>
+               <font size=3>NOMBRE DEL RESPONSABLE DEL OPERADOR _______________________________________________________________ NOMBRE RECTOR ESTABLECIMIENTO EDUCATIVO _______________________________________________________________</font>
+            </b></td>
+      </tr>
+      <tr>
+         <td style="border-left: 1px solid #000000; border-right: 1px solid #000000" colspan=37 height="85" align="left"
+            valign=middle sdnum="1033;0;0%"><b>
+               <font size=3> </font>
+            </b></td>
+      </tr>
+      <tr>
+         <td style="border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+            colspan=37 height="66" align="left" valign=middle sdnum="1033;0;0%"><b>
+               <font size=3>FIRMA DEL RESPONSABLE DEL OPERADOR _______________________________________________________________ FIRMA DEL RECTOR ESTABLECIMIENTO EDUCATIVO _______________________________________________________________</font>
+            </b></td>
+      </tr>
+      <tr>
+         <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+            colspan=37 height="31" align="center" valign=middle sdnum="1033;0;0%"><b>
+               <font size=3><br></font>
+            </b></td>
+      </tr>
+      <tr>
+         <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+            colspan=37 height="146" align="left" valign=top sdnum="1033;0;0%"><b>
+               <font size=3>Observaciones:</font>
+            </b></td>
+      </tr>
+     
+      <tr>
+         <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000"
+            colspan=11 height="190" align="left" valign=middle>
+            <font size=3>NOTA: El operador/responsable de prestar el servicio en los establecimientos educativos debe
+               tener en cuenta:<br>- El archivo de este documento impreso y debidamente diligenciado debe realizarse
+               conforme a los Lineamientos Técnico Administrativos del Programa PAE y estar disponibles para consulta de
+               los veedores y/o supervisores del mismo.<br>- En procura del cuidado del medio ambiente hacer uso
+               racional de los recursos.<br>- La firma del presente documento da fe la veracidad del contenido del mismo
+               para el seguimiento, monitoreo y control del programa.<br>- El presente formato no debe tener tachones,
+               ni enmendaduras para garantizar la validez del mismo.</font>
+         </td>
+         <td style="border-bottom: 1px solid #000000" align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-bottom: 1px solid #000000" align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-bottom: 1px solid #000000" align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-bottom: 1px solid #000000" align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-bottom: 1px solid #000000" align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-bottom: 1px solid #000000" align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-bottom: 1px solid #000000" align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-bottom: 1px solid #000000" align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-bottom: 1px solid #000000" align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-bottom: 1px solid #000000" align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-bottom: 1px solid #000000" align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-bottom: 1px solid #000000" align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-bottom: 1px solid #000000" align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-bottom: 1px solid #000000" align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-bottom: 1px solid #000000" align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-bottom: 1px solid #000000" align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-bottom: 1px solid #000000" align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-bottom: 1px solid #000000" align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-bottom: 1px solid #000000" align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-bottom: 1px solid #000000" align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-bottom: 1px solid #000000" align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-bottom: 1px solid #000000" align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-bottom: 1px solid #000000" align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-bottom: 1px solid #000000" align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-bottom: 1px solid #000000" align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+         <td style="border-bottom: 1px solid #000000; border-right: 1px solid #000000" align="left" valign=bottom>
+            <font size=3><br></font>
+         </td>
+      </tr>
+   </table>
+   <!-- ************************************************************************** -->
+</body>
+
+</html>
