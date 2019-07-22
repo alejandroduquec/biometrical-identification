@@ -243,6 +243,7 @@ def GeneratePDFView(request):
     """Generate PDF Reports"""
     month = timezone.now().month
     institution = Institution.objects.get(id=1)
+    # Get week days for month
     max_days = calendar.monthrange(2019,timezone.now().month)[1]
     week_days = []
     for day in range(1, max_days+1):
@@ -250,10 +251,12 @@ def GeneratePDFView(request):
         name_day = datetime.datetime.strptime(evaluated_day, '%Y-%m-%d').strftime("%A")
         if not name_day in weekend:
             week_days.append(datetime.datetime.strptime(evaluated_day, '%Y-%m-%d'))
+    rations = FoodRation.objects.filter(created__lte=week_days[-1], created__gte=week_days[0])
     if len(week_days) < 24:
         for i in range(len(week_days), 25):
             week_days.append(0)
     #rations = FoodRation.objects.values('student__id','food_type').annotate(food=Count('student'))
+    rations = Student.object.all()
     context = {
         'departament': 'Antioquia',
         'institution': institution,
