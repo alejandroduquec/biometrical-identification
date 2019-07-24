@@ -242,7 +242,7 @@ class ReportRationsView(LoginRequiredMixin, TemplateView):
 def GeneratePDFView(request):
     """Generate PDF Reports"""
     month = timezone.now().month
-    institution = Institution.objects.get(id=1)
+    institution = Institution.objects.get(id=2)
     # Get week days for month
     max_days = calendar.monthrange(2019, timezone.now().month)[1]
     week_days = []
