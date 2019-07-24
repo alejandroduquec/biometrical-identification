@@ -244,24 +244,46 @@ def GeneratePDFView(request):
     month = timezone.now().month
     institution = Institution.objects.get(id=1)
     # Get week days for month
-    max_days = calendar.monthrange(2019,timezone.now().month)[1]
+    max_days = calendar.monthrange(2019, timezone.now().month)[1]
     week_days = []
     for day in range(1, max_days+1):
         evaluated_day = '2019-{}-{}'.format(month, day)
         name_day = datetime.datetime.strptime(evaluated_day, '%Y-%m-%d').strftime("%A")
         if not name_day in weekend:
             week_days.append(datetime.datetime.strptime(evaluated_day, '%Y-%m-%d'))
-    rations = FoodRation.objects.filter(created__lte=week_days[-1], created__gte=week_days[0])
-    if len(week_days) < 24:
-        for i in range(len(week_days), 25):
+    if len(week_days) < 23:
+        for i in range(len(week_days), 23):
             week_days.append(0)
-    #rations = FoodRation.objects.values('student__id','food_type').annotate(food=Count('student'))
-    rations = Student.object.all()
+    
+    user_array = []
+    students_food = FoodRation.objects.values('student').filter(student__institution=institution)
+    students = Student.objects.filter(id__in=students_food).distinct()
+    for student in students:
+        user_food_days = week_days.copy()
+        dates = FoodRation.objects.values('food_time').filter(student=student.pk, food_type=2).order_by('-food_time')
+        if dates:  
+            for date in dates:
+                current = date['food_time'].replace(hour=0, minute=0, second=0, tzinfo=None)
+                if current in user_food_days:
+                    index = user_food_days.index(current)
+                    user_food_days[index] = 'X'
+            user_dict = {
+                'student': student,
+                'user_food_days': user_food_days,
+                'type_food': 'CAJT',
+                'total': dates.count()
+
+            }
+            user_array.append(user_dict)
+
+    #students = FoodRation.objects.annotate(food=Count('student'), aas=Count('food_type')).order_by('food_type')
+    
     context = {
         'departament': 'Antioquia',
         'institution': institution,
         'month': timezone.now(),
-        'week_days': week_days
+        'week_days': week_days,
+        'user_array': user_array
     }
 
     template = get_template('format/food.html')

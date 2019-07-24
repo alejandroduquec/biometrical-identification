@@ -172,7 +172,13 @@
             align="left" valign=middle><b>
                <font size=3>{{day|date:"d" }}</font>
             </b></td>
+            {% else %}
+            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
+            align="left" valign=middle><b>
+               <font size=3></font>
+            </b></td>
             {% endif %}
+            
          {% endfor %}
          {% endif %}
          
@@ -191,8 +197,8 @@
         
       </tr>
       <!-- data user -->
-      {% if rations %}
-      {% for ration in rations %}
+      {% if user_array %}
+      {% for user in user_array %}
         
     
       <tr>
@@ -202,143 +208,67 @@
             </td>
             <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-right: 1px solid #000000"
                align="center" valign=bottom>
-               <font size=3>{{ration.student.document_type}}</font>
+               <font size=3>{{user.student.document_type.abreviation}}</font>
             </td>
             <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000"
                align="center" valign=bottom>
-               <font size=3>{{ration.student.document}}</font>
+               <font size=3>{{user.student.document}}</font>
             </td>
             <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
                align="left" valign=bottom>
-               <font size=3>{{ration.student.names.0|title}}</font>
+               <font size=3>{{user.student.names.0|title}}</font>
             </td>
             <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
                align="left" valign=bottom>
-               <font size=3>{{ration.student.names.1|title}}</font>
+               <font size=3>{{user.student.names.1|title}}</font>
             </td>
             <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
                align="left" valign=bottom>
-               <font size=3>{{ration.student.last_names.0|title}}</font>
+               <font size=3>{{user.student.last_names.0|title}}</font>
             </td>
             <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
                align="left" valign=bottom>
-               <font size=3>{{ration.student.last_names.1|title}}</font>
+               <font size=3>{{user.student.last_names.1|title}}</font>
             </td>
             <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
                align="left" valign=bottom>
-               <font size=3>{{ration.student.age}}</font>
+               <font size=3>{{user.student.age}}</font>
             </td>
             <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
                align="left" valign=bottom>
-               <font size=3><br></font>
+               <font size=3>---</font>
             </td>
             <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
                align="left" valign=bottom>
-               <font size=3>{{ration.student.gender}}</font>
+               <font size=3>{{user.student.gender}}</font>
             </td>
             <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
                align="left" valign=bottom>
-               <font size=3>{{ration.student.grade}}</font>
+               <font size=3>{{user.student.grade}}</font>
             </td>
             <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000"
                align="left" valign=bottom>
-               <font size=3>{{ration.food_type}}</font>
+               <font size=3>{{user.type_food}}</font>
             </td>
+            
+
+            {% for date  in user.user_food_days %}
+            {% if date != 'X' %}
             <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
                align="left" valign=bottom>
-               <font size=3><br></font>
+               <font size=3></font>
             </td>
+            {% else %}  
             <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
                align="left" valign=bottom>
-               <font size=3><br></font>
+               <font size=3>X</font>
             </td>
-            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
-               align="left" valign=bottom>
-               <font size=3><br></font>
-            </td>
-            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
-               align="left" valign=bottom>
-               <font size=3><br></font>
-            </td>
-            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
-               align="left" valign=bottom>
-               <font size=3><br></font>
-            </td>
-            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
-               align="left" valign=bottom>
-               <font size=3><br></font>
-            </td>
-            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
-               align="left" valign=bottom>
-               <font size=3><br></font>
-            </td>
-            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
-               align="left" valign=bottom>
-               <font size=3><br></font>
-            </td>
-            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
-               align="left" valign=bottom>
-               <font size=3><br></font>
-            </td>
-            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
-               align="left" valign=bottom>
-               <font size=3><br></font>
-            </td>
-            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
-               align="left" valign=bottom>
-               <font size=3><br></font>
-            </td>
-            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
-               align="left" valign=bottom>
-               <font size=3><br></font>
-            </td>
-            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
-               align="left" valign=bottom>
-               <font size=3><br></font>
-            </td>
-            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
-               align="left" valign=bottom>
-               <font size=3><br></font>
-            </td>
-            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
-               align="left" valign=bottom>
-               <font size=3><br></font>
-            </td>
-            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
-               align="left" valign=bottom>
-               <font size=3><br></font>
-            </td>
-            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
-               align="left" valign=bottom>
-               <font size=3><br></font>
-            </td>
-            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
-               align="left" valign=bottom>
-               <font size=3><br></font>
-            </td>
-            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
-               align="left" valign=bottom>
-               <font size=3><br></font>
-            </td>
-            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
-               align="left" valign=bottom>
-               <font size=3><br></font>
-            </td>
-            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
-               align="left" valign=bottom>
-               <font size=3><br></font>
-            </td>
-            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
-               align="left" valign=middle>
-               <font size=3><br></font>
-            </td>
-            <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
-               align="left" valign=middle>
-               <font size=3><br></font>
-            </td>
+            {% endif %}  
+            {% endfor %}
+   
             <td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
                colspan=2 align="center" valign=middle>
-               <font size=3><br></font>
+               <font size=3>{{user.total}}</font>
             </td>
          </tr>
          {% endfor %}
@@ -349,7 +279,7 @@
       <tr>
          <td style="border-top: 1px solid #000000; border-bottom: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
             height="47" align="center" valign=bottom>
-            <font size=3><br></font>
+            <font size=3></font>
          </td>
          <td style="border-top: 1px solid #000000; border-bottom: 2px solid #000000; border-right: 1px solid #000000"
             align="center" valign=bottom>
@@ -381,7 +311,7 @@
          </td>
          <td style="border-top: 1px solid #000000; border-bottom: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
             align="left" valign=bottom>
-            <font size=3><br></font>
+            <font size=3></font>
          </td>
          <td style="border-top: 1px solid #000000; border-bottom: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
             align="left" valign=bottom>
@@ -405,7 +335,7 @@
          </td>
          <td style="border-top: 1px solid #000000; border-bottom: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
             align="left" valign=bottom>
-            <font size=3><br></font>
+            <font size=3></font>
          </td>
          <td style="border-top: 1px solid #000000; border-bottom: 2px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000"
             align="left" valign=bottom>
