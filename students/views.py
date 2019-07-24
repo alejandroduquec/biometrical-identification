@@ -16,7 +16,8 @@ from django.urls import reverse_lazy
 from django.db.models import Count
 from django.utils import timezone
 from django.template.loader import get_template
-
+from django.conf import settings
+from django.template import Context
 
 # Views
 from students import views
@@ -32,6 +33,8 @@ import sweetify
 from students.utils import render_to_pdf
 import calendar
 import datetime
+import os
+from xhtml2pdf import pisa
 
 weekend = ['Saturday', 'Sunday']
 
@@ -286,15 +289,19 @@ def GeneratePDFView(request):
         'user_array': user_array
     }
 
-    template = get_template('format/food.html')
+    template_path = 'format/food.html'
+    # Create a Django response object, and specify content_type as pdf
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="report.pdf"'
+    # find the template and render it.
+    template = get_template(template_path)
     html = template.render(context)
-    pdf = render_to_pdf('format/food.html', context)
-    response = HttpResponse(pdf, content_type='application/pdf')
-    filename = "respuesta_tramite.pdf" 
-    content = "inline; filename='%s'" %(filename)
-    download = request.GET.get("download")
-    if download:
-        content = "attachment; filename='%s'" %(filename)
-    response['Content-Disposition'] = content
+
+    # create a pdf
+    pisaStatus = pisa.CreatePDF(
+       html, dest=response)
+    # if error then show some funy view
+    if pisaStatus.err:
+       return HttpResponse('We had some errors <pre>' + html + '</pre>')
     return response
 

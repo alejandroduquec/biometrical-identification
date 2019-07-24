@@ -24,6 +24,9 @@
    <style type="text/css">
       @page {
          size: legal landscape;
+         @frame {
+            
+        }
          
       }
 
@@ -198,7 +201,7 @@
       </tr>
       <!-- data user -->
       {% if user_array %}
-      {% for user in user_array %}
+      {% for user in user_array|slice:":50" %}
         
     
       <tr>
