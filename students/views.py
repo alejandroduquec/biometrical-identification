@@ -16,13 +16,14 @@ from django.urls import reverse_lazy
 from django.db.models import Count
 from django.utils import timezone
 from django.template.loader import get_template
-
+from django.conf import settings
+from django.template import Context
 
 # Views
 from students import views
 
 # Model
-from students.models import Student, DactilarIdentification, FoodRation
+from students.models import Student, DactilarIdentification, FoodRation, Institution
 
 # Forms
 from students.forms import SearchStudentForm, RegisterStudentForm
@@ -30,6 +31,12 @@ from students.forms import SearchStudentForm, RegisterStudentForm
 # Utils
 import sweetify
 from students.utils import render_to_pdf
+import calendar
+import datetime
+import os
+from xhtml2pdf import pisa
+
+weekend = ['Saturday', 'Sunday']
 
 
 class IndexView(LoginRequiredMixin, TemplateView):
@@ -41,8 +48,16 @@ class IndexView(LoginRequiredMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         students = Student.objects
         dactilar = DactilarIdentification.objects
-        if self.request.user.profile.institution:
-            pass
+        user_intitution = self.request.user.profile.institution
+        if user_intitution:
+            total_students_by_instit = students.filter(
+                institution=user_intitution)
+            context['total_students'] = total_students_by_instit.count()
+            context['total_students_registered'] = dactilar.filter(
+                id__in=total_students_by_instit).count()
+            active_user = (
+                context['total_students_registered']/context['total_students'])*100
+            context['users_active'] = round(active_user, 2)
         else:
             context['total_students'] = students.all().count()
             context['total_students_registered'] = students.filter(
@@ -54,6 +69,9 @@ class IndexView(LoginRequiredMixin, TemplateView):
 
 
 def identification_name(student_data):
+    """Search user by firstname or lastname
+    [student_data]:user name or lastname
+    """
     if student_data.isnumeric():
         students = Student.objects.filter(
             Q(document__icontains=student_data))
@@ -72,10 +90,17 @@ def identification_name(student_data):
     return students
 
 
+def exclude_institution(inst):
+    """Switch id to exclude institution"""
+    if inst.id == 1:
+        return 2
+    else:
+        return 1
+
+
 class SearchStudent(LoginRequiredMixin, FormView):
     template_name = 'search.html'
     form_class = SearchStudentForm
-    # TODO: filter by institution profile and sweerify, responsive table
 
     def post(self, request, *args, **kwargs):
         """On post to do"""
@@ -83,7 +108,10 @@ class SearchStudent(LoginRequiredMixin, FormView):
         if form.is_valid():
             data = form.cleaned_data
             student_data = data.get('student')
+            user_institution = request.user.profile.institution
             students = identification_name(student_data)
+            if user_institution:
+                students = students.exclude(institution=exclude_institution(user_institution))
             if students:
                 sweetify.success(
                     request, 'Éxito', text='La busqueda ha finalizado', persistent='Listo')
@@ -118,11 +146,13 @@ class ReportStudents(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         """add data  to context"""
         context = super().get_context_data(**kwargs)
-        students = Student.objects.all()
-        if self.request.user.profile.institution:
-            pass
+        user_institution = self.request.user.profile.institution
+        if user_institution:
+            students = Student.objects.filter(institution=user_institution.id)
         else:
-            context['students'] = students
+            students = Student.objects.all()
+
+        context['students'] = students
         return context
 
 
@@ -151,8 +181,22 @@ class FoodRationsView(LoginRequiredMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         students = Student.objects
         dactilar = DactilarIdentification.objects
-        if self.request.user.profile.institution:
-            pass
+        user_institution = self.request.user.profile.institution        
+        if user_institution:
+            total_students_by_instit = students.filter(
+                institution=user_institution)
+            context['total_students_registered'] = dactilar.filter(
+                id__in=total_students_by_instit).count()
+            context['total_rations'] = FoodRation.objects.filter(
+                student__in=total_students_by_instit
+            ).count()
+            context['breakfast'] = FoodRation.objects.filter(
+                food_type=1,
+                student__in=total_students_by_instit
+                ).count()
+            context['lunch'] = context['total_rations'] - context['breakfast']
+
+            
         else:
             context['total_students_registered'] = students.filter(
                 id__in=dactilar.all()).count()
@@ -161,20 +205,20 @@ class FoodRationsView(LoginRequiredMixin, TemplateView):
                 food_type=1).count()
             context['lunch'] = context['total_rations'] - context['breakfast']
 
-            institution_counter = FoodRation.objects.select_related('id')\
-                .all()\
-                .annotate(name=F('student__institution__name'))\
-                .values('name')\
-                .annotate(user_count=Count('name'))
-            average = 0
-            if len(institution_counter) > 1:
-                for inst in list(institution_counter):
-                    average += inst['user_count']
-                institution_counter[0]['user_count'] = round(
-                    (institution_counter[0]['user_count']/average)*100, 1)
-                institution_counter[1]['user_count'] = round(
-                    (institution_counter[1]['user_count']/average)*100, 1)
-            context['institutions_data'] = institution_counter
+        institution_counter = FoodRation.objects.select_related('id')\
+            .all()\
+            .annotate(name=F('student__institution__name'))\
+            .values('name')\
+            .annotate(user_count=Count('name'))
+        average = 0
+        if len(institution_counter) > 1:
+            for inst in list(institution_counter):
+                average += inst['user_count']
+            institution_counter[0]['user_count'] = round(
+                (institution_counter[0]['user_count']/average)*100, 1)
+            institution_counter[1]['user_count'] = round(
+                (institution_counter[1]['user_count']/average)*100, 1)
+        context['institutions_data'] = institution_counter
 
         return context
 
@@ -186,29 +230,78 @@ class ReportRationsView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         """add data  to context"""
         context = super().get_context_data(**kwargs)
-        rations = FoodRation.objects.all()
-        if self.request.user.profile.institution:
-            pass
+        user_institution = self.request.user.profile.institution        
+        if user_institution:
+            total_students_by_instit = Student.objects.filter(
+                institution=user_institution)
+            rations = FoodRation.objects.filter(student__in=total_students_by_instit)
         else:
-            context['rations'] = rations
+            rations = FoodRation.objects.all()
+
+        context['rations'] = rations
         return context
 
 
 def GeneratePDFView(request):
     """Generate PDF Reports"""
-    context={
-        'size':19,
-        'size2':16,
+    month = timezone.now().month
+    institution = Institution.objects.get(id=2)
+    # Get week days for month
+    max_days = calendar.monthrange(2019, timezone.now().month)[1]
+    week_days = []
+    for day in range(1, max_days+1):
+        evaluated_day = '2019-{}-{}'.format(month, day)
+        name_day = datetime.datetime.strptime(evaluated_day, '%Y-%m-%d').strftime("%A")
+        if not name_day in weekend:
+            week_days.append(datetime.datetime.strptime(evaluated_day, '%Y-%m-%d'))
+    if len(week_days) < 23:
+        for i in range(len(week_days), 23):
+            week_days.append(0)
+    
+    user_array = []
+    students_food = FoodRation.objects.values('student').filter(student__institution=institution)
+    students = Student.objects.filter(id__in=students_food).distinct()
+    for student in students:
+        user_food_days = week_days.copy()
+        dates = FoodRation.objects.values('food_time').filter(student=student.pk, food_type=2).order_by('-food_time')
+        if dates:  
+            for date in dates:
+                current = date['food_time'].replace(hour=0, minute=0, second=0, tzinfo=None)
+                if current in user_food_days:
+                    index = user_food_days.index(current)
+                    user_food_days[index] = 'X'
+            user_dict = {
+                'student': student,
+                'user_food_days': user_food_days,
+                'type_food': 'CAJT',
+                'total': dates.count()
+
+            }
+            user_array.append(user_dict)
+
+    #students = FoodRation.objects.annotate(food=Count('student'), aas=Count('food_type')).order_by('food_type')
+    
+    context = {
+        'departament': 'Antioquia',
+        'institution': institution,
+        'month': timezone.now(),
+        'week_days': week_days,
+        'user_array': user_array
     }
-    template = get_template('format/example2.html')
+
+    template_path = 'format/food.html'
+    # Create a Django response object, and specify content_type as pdf
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="report.pdf"'
+    # find the template and render it.
+    template = get_template(template_path)
     html = template.render(context)
-    pdf = render_to_pdf('format/example2.html', context)
-    response = HttpResponse(pdf, content_type='application/pdf')
-    filename = "respuesta_tramite.pdf" 
-    content = "inline; filename='%s'" %(filename)
-    download = request.GET.get("download")
-    if download:
-        content = "attachment; filename='%s'" %(filename)
-    response['Content-Disposition'] = content
+
+    # create a pdf
+    pisaStatus = pisa.CreatePDF(
+       html, dest=response)
+    # if error then show some funy view
+    if pisaStatus.err:
+       return HttpResponse('We had some errors <pre>' + html + '</pre>')
     return response
 
