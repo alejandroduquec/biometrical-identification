@@ -32,12 +32,13 @@ urlpatterns = [
         name='rations'),
     path(
         route='eliminar-estudiante/<int:pk>/',
-        view=views.DeleteStudentView,
+        view=views.DeleteStudentView.as_view(),
         name='delete'),
     path(
         route='generate-pdf/',
-        view=views.GeneratePDFView,
+        view=views.GeneratePDFView.as_view(),
         name='generate-pdf'),
+        
 
 
 

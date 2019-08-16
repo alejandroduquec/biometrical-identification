@@ -1,11 +1,25 @@
-"""Students forms """
+"""Students forms."""
 
 # Django
 from django import forms
 from django.forms import ModelForm, ModelChoiceField
-# model
+from django.utils import timezone
+
+# Model
 from django.contrib.auth.models import User
-from students.models import Student
+from students.models import Student, TypeFood
+
+MONTH_CHOICES = [
+    ('01', 'Enero'),
+    ('02', 'Febrero'),
+    ('03', 'Marzo'),
+    ('04',  'Abril'),
+    ('05', 'Mayo'),
+    ('06', 'Junio'),
+    ('07', 'Julio'),
+    ('08', 'Agosto'),
+    ('09', 'Septiembre'),
+]
 
 
 class RegisterStudentForm(ModelForm):
@@ -47,7 +61,8 @@ class RegisterStudentForm(ModelForm):
 
 
 class SearchStudentForm(forms.Form):
-    """Search user """
+    """Search user Form."""
+
     student = forms.CharField(
         label='Búsqueda de Estudiante',
         widget=forms.TextInput(
@@ -56,3 +71,25 @@ class SearchStudentForm(forms.Form):
                 'placeholder': 'Nombre o Documento de identidad'
             }
         ))
+
+
+class ReportPdfForm(forms.Form):
+    """Report Pdf Form."""
+
+    month = forms.CharField(
+        label='Seleccione Mes',
+        widget=forms.Select(
+            choices=MONTH_CHOICES,
+            attrs={
+                'class': 'form-control',
+            }
+        )
+    )
+    type_food = forms.ModelChoiceField(
+            label='Seleccione Tipo de Comida',
+            queryset=TypeFood.objects.all(),
+            widget=forms.Select(attrs={
+                'class': 'form-control',
+            })
+        )
+    
