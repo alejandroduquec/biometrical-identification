@@ -265,11 +265,18 @@ class GeneratePDFView(LoginRequiredMixin, FormView):
             folder_files = []
             files = os.listdir("media/formats/{}".format(folder))
             for file in files:
-                if 'inst{}'.format(self.user_intitution.id) in file:
-                    folder_files.append({
-                        'url': ("/media/formats/{}/{}".format(folder,file)),
-                        'name': file
+                if self.user_intitution:
+                    # User from institutions only can see himself reports.
+                    if 'inst{}'.format(self.user_intitution.id) in file:
+                        folder_files.append({
+                            'url': ("/media/formats/{}/{}".format(folder, file)),
+                            'name': file
                         })
+                else:
+                    folder_files.append({
+                        'url': ("/media/formats/{}/{}".format(folder, file)),
+                        'name': file
+                    })
             pdf_routes[folder] = folder_files
         self.files = pdf_routes
         return super().dispatch(request, *args, **kwargs)
@@ -286,7 +293,7 @@ class GeneratePDFView(LoginRequiredMixin, FormView):
         type_food = request.POST.get('type_food')
 
         if not self.user_intitution:
-            institution = Institution.objects.get(id=2)
+            return self.form_invalid(self.get_form())
         else:
             institution = self.user_intitution
 
@@ -294,15 +301,15 @@ class GeneratePDFView(LoginRequiredMixin, FormView):
             month,
             institution.id,
             type_food
-            )
+        )
 
         if file_name in self.files:
             sweetify.error(
-                    request,
-                    'Información',
-                    text='El reporte ya existe',
-                    persistent='Listo'
-                    )
+                request,
+                'Información',
+                text='El reporte ya existe',
+                persistent='Listo'
+            )
             return render(
                 request,
                 self.template_name,
@@ -314,7 +321,7 @@ class GeneratePDFView(LoginRequiredMixin, FormView):
             type_food_response = 'CAJM'
         else:
             type_food_response = 'CAJT'
-        # Response name 
+        # Response name
         month_name = MONTH_CHOICES[int(month)-1][1]
 
         # Get week days for month
@@ -337,7 +344,8 @@ class GeneratePDFView(LoginRequiredMixin, FormView):
             food_time__month=month,
             food_type=type_food)
 
-        students = Student.objects.filter(id__in=students_food.values('student'))
+        students = Student.objects.filter(
+            id__in=students_food.values('student'))
         for student in students:
             user_food_days = week_days.copy()
             dates = students_food.values('food_time').filter(
@@ -368,7 +376,8 @@ class GeneratePDFView(LoginRequiredMixin, FormView):
         }
         template_path = 'format/food.html'
         result = render_to_pdf(template_path, context)
-        lugar = FileSystemStorage(location='media/formats/2019-{}/'.format(month))
+        lugar = FileSystemStorage(
+            location='media/formats/2019-{}/'.format(month))
         lugar.save('inst{}-food{}.pdf'.format(institution.id, type_food), result)
 
         return super().post(request, *args, **kwargs)
@@ -389,6 +398,14 @@ class GeneratePDFView(LoginRequiredMixin, FormView):
         # if pisaStatus.err:
         #     return HttpResponse('We had some errors <pre>' + html + '</pre>')
         # return response
+
+    def form_invalid(self, form):
+        """Invalid form."""
+        sweetify.error(
+            self.request,
+            'Sin permisos para reportes.',
+            text='Usuario no pertenece a la institución educativa ')
+        return super().form_invalid(form)
 
     def get_success_url(self):
         """Return to list of  naturaleza."""

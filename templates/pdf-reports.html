@@ -37,7 +37,7 @@
         {% if files_array %}
         <h2>Año - Mes: {{folder}}</h2>
         {% for dict_item in files_array %}
-        <a href="{{dict_item.url}}">{{dict_item.name}}</a>
+        <a href="{{dict_item.url}}"><i class="fa fa-file-pdf-o"></i> {{dict_item.name}}</a>
         <br>
         
         {% endfor %}
