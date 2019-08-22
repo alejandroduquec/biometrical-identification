@@ -260,15 +260,17 @@ class GeneratePDFView(LoginRequiredMixin, FormView):
         """Get list directory."""
         directory = os.listdir("media/formats/")
         pdf_routes = {}
+        self.user_intitution = self.request.user.profile.institution
         for folder in directory:
-            folder_files =[]
+            folder_files = []
             files = os.listdir("media/formats/{}".format(folder))
             for file in files:
-                 folder_files.append({
-                    'url': ("/media/formats/{}/{}".format(folder,file)),
-                    'name': file
-                    })
-            pdf_routes[folder] =folder_files
+                if 'inst{}'.format(self.user_intitution.id) in file:
+                    folder_files.append({
+                        'url': ("/media/formats/{}/{}".format(folder,file)),
+                        'name': file
+                        })
+            pdf_routes[folder] = folder_files
         self.files = pdf_routes
         return super().dispatch(request, *args, **kwargs)
 
@@ -282,12 +284,11 @@ class GeneratePDFView(LoginRequiredMixin, FormView):
         """Submit Form."""
         month = request.POST.get('month')
         type_food = request.POST.get('type_food')
-        user_intitution = self.request.user.profile.institution
 
-        if not user_intitution:
+        if not self.user_intitution:
             institution = Institution.objects.get(id=2)
         else:
-            institution = user_intitution
+            institution = self.user_intitution
 
         file_name = '/media/formats/2019-{}/inst{}-food{}.pdf'.format(
             month,

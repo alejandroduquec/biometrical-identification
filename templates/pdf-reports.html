@@ -34,15 +34,16 @@
     <div class="col-md-12">
         <h3>Reportes Generados</h3>
         {% for folder, files_array in files.items %}
+        {% if files_array %}
         <h2>Año - Mes: {{folder}}</h2>
         {% for dict_item in files_array %}
         <a href="{{dict_item.url}}">{{dict_item.name}}</a>
         <br>
         
         {% endfor %}
+        {% endif %}
         {% endfor %}
 
-          
     </div>
     <div class="clearfix"></div>
 
