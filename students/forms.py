@@ -7,7 +7,7 @@ from django.utils import timezone
 
 # Model
 from django.contrib.auth.models import User
-from students.models import Student, TypeFood
+from students.models import Student, TypeFood, Institution
 
 MONTH_CHOICES = [
     ('01', 'Enero'),
@@ -85,6 +85,14 @@ class ReportPdfForm(forms.Form):
             }
         )
     )
+
+    institution = forms.ModelChoiceField(
+        label='Seleccione institucion',
+            queryset=Institution.objects.all(),
+            widget=forms.Select(attrs={
+                'class': 'form-control',
+            })
+        )
     type_food = forms.ModelChoiceField(
             label='Seleccione Tipo de Comida',
             queryset=TypeFood.objects.all(),
@@ -92,4 +100,5 @@ class ReportPdfForm(forms.Form):
                 'class': 'form-control',
             })
         )
-    
+
+

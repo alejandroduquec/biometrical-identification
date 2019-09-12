@@ -16,9 +16,14 @@
         <div class="page-title">
             <div class="">
                 <h3>Reportes PDF</h3>
+                {%if not request.user.is_superuser%}
+                <p>Nota: Los reportes son generados automáticamente por el sistema al finalizar el mes.</p>
+    {%endif%}
+            
             </div>
         </div>
     </div>
+{%if request.user.is_superuser%}
     <div class="col-md-6">
         <form method="POST">
             {% csrf_token %}
@@ -31,7 +36,8 @@
         </form>
 
     </div>
-    <div class="col-md-12">
+    {%endif%}
+    <div class="col-md-12" style="padding-top: 30px">
         <h3>Reportes Generados</h3>
         {% for folder, files_array in files.items %}
         {% if files_array %}

@@ -12,7 +12,7 @@
 __pycache__/
 dactilar/settings.py
 db.sqlite3
-media
+
 production/
 
 # If your build process includes running collectstatic, then you probably don't need or want to include staticfiles/
