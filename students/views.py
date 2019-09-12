@@ -296,10 +296,16 @@ class GeneratePDFView(LoginRequiredMixin, FormView):
         # Get institution name 
         institution_name = Institution.objects.get(id=institution)
 
+        # Name response type food
+        if type_food == '1':
+            type_food_response = 'CAJM'
+        else:
+            type_food_response = 'Almuerzo'
+
         file_name = '/media/formats/2019-{}/inst{}-food{}.pdf'.format(
             month,
             institution,
-            type_food
+            type_food_response
         )
 
         if file_name in self.files:
@@ -315,11 +321,7 @@ class GeneratePDFView(LoginRequiredMixin, FormView):
                 {'form': self.form_class,
                  'files': self.files}
             )
-        # Name response type food
-        if type_food == 1:
-            type_food_response = 'CAJM'
-        else:
-            type_food_response = 'CAJT'
+        
         # Response name
         month_name = MONTH_CHOICES[int(month)-1][1]
 
@@ -377,7 +379,7 @@ class GeneratePDFView(LoginRequiredMixin, FormView):
         result = render_to_pdf(template_path, context)
         lugar = FileSystemStorage(
             location='media/formats/2019-{}/'.format(month))
-        lugar.save('inst{}-food{}.pdf'.format(institution, type_food), result)
+        lugar.save('inst{}-food{}.pdf'.format(institution, type_food_response), result)
 
         return super().post(request, *args, **kwargs)
 
